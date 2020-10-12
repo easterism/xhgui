@@ -11,8 +11,9 @@ abstract class TestCase extends \PHPUnit\Framework\TestCase
     /**
      * Load a fixture into the database.
      */
-    protected function loadFixture(SaverInterface $saver, $file)
+    protected function loadFixture(SaverInterface $saver, string $fileName = 'results.json')
     {
+        $file = dirname(__DIR__, 2) . '/tests/fixtures/' . $fileName;
         $data = json_decode(file_get_contents($file), true);
         foreach ($data as $record) {
             if (isset($record['meta']['request_time'])) {
